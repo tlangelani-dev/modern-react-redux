@@ -2,12 +2,30 @@ import React, { Component } from 'react';
 
 class SearchBar extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            term: ''
+        };
+    }
+
     onInputChange(event) {
-        console.log(event.target.value);
+        this.setState({
+            term: event.target.value
+        });
     }
 
     render() {
-        return <input type="text" onChange={this.onInputChange} placeholder="Enter youtube video to search..." />;
+        return (
+            <section>
+                <input type="text"
+                    onChange={this.onInputChange.bind(this)}
+                    value={this.state.term}
+                    placeholder="Enter youtube video to search..."
+                />
+                <pre>You typed: {this.state.term}</pre>
+            </section>
+        );
     }
 };
 
