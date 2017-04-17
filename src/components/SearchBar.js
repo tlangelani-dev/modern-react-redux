@@ -17,13 +17,12 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <section>
+            <section className="search-bar">
                 <input type="text"
                     onChange={this.onInputChange.bind(this)}
                     value={this.state.term}
                     placeholder="Enter youtube video to search..."
                 />
-                <pre>You typed: {this.state.term}</pre>
             </section>
         );
     }
