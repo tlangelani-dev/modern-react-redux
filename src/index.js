@@ -1,19 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import YTSearch from 'youtube-api-search';
 
 import SearchBar from './components/SearchBar';
+import VideoList from './components/VideoList';
 
-// google api key
 const API_KEY = 'AIzaSyDxJ0R_tp-bdJND_2HBT8FOkli43r980Z0';
 
-// Create new component. This should produce HTML.
-const App = () => {
-    return (
-        <div>
-            <SearchBar />
-        </div>
-    );
+
+class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { videos: [] };
+        YTSearch({
+            key: API_KEY,
+            term: 'surfboards'
+        }, (videos) => {
+            this.setState({ videos });
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <SearchBar />
+                <VideoList videos={this.state.videos} />
+            </div>
+        );
+    }
 };
 
-// Take he generatd HTML and dispplay on the page.
 ReactDOM.render(<App />, document.querySelector('.container'));
